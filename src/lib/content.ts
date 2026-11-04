@@ -4,7 +4,7 @@
 export const site = {
   name: "Saad Khazi Ahmed",
   shortName: "Saad Ahmed",
-  url: "https://portfolio-seven-neon-95.vercel.app",
+  url: "https://saadkhaziahmed.vercel.app",
   email: "saadkhaziahmed2005@gmail.com",
   github: "https://github.com/Saadahmed05",
   linkedin: "https://linkedin.com/in/saadahmed05",
