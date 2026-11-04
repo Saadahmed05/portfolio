@@ -165,12 +165,12 @@ export const projects: Project[] = [
 export const current = {
   title: "SIEdits",
   kicker: "An open-source video editor that your AI assistant can operate",
-  lead: "syedmukheeth",
-  leadUrl: "https://github.com/syedmukheeth",
+  partner: "syedmukheeth",
+  partnerUrl: "https://github.com/syedmukheeth",
   summary:
     "Timeline editing and motion graphics in the browser, for talking-head creators. Every cut, caption, zoom and graphic is a typed, validated operation, so the creator's own assistant (Claude, ChatGPT, Cursor) can edit through an MCP connector, and every change can still be undone or tweaked by hand.",
   contribution:
-    "I'm contributing alongside the project's creator. So far: fixing the Windows setup, hardening the local API, and stripping generic UI patterns out of the editor so it reads like professional editing software.",
+    "I'm building this with @syedmukheeth. My work so far: fixing the Windows setup, hardening the local API, and stripping generic UI patterns out of the editor so it reads like professional editing software.",
   status: "Week 1 — go / no-go spikes before product code",
   spikes: [
     {

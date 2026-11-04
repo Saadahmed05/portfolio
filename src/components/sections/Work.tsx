@@ -123,9 +123,9 @@ function NowBuilding() {
         </p>
         <div className="flex flex-wrap gap-x-6 gap-y-2 text-sm">
           <span className="text-muted">
-            Open source, led by{" "}
-            <a href={c.leadUrl} target="_blank" rel="noopener noreferrer" className="link-static text-ink">
-              @{c.lead}
+            Open source · building it with{" "}
+            <a href={c.partnerUrl} target="_blank" rel="noopener noreferrer" className="link-static text-ink">
+              @{c.partner}
             </a>
           </span>
           {c.links.map((l) => (
