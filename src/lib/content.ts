@@ -9,6 +9,7 @@ export const site = {
   github: "https://github.com/Saadahmed05",
   linkedin: "https://linkedin.com/in/saadahmed05",
   location: "Hyderabad, India",
+  resume: "/Saad_Khazi_Ahmed_Resume.pdf",
   description:
     "Saad Khazi Ahmed is a final-year CSE (AI & ML) student in Hyderabad who builds AI systems from the data up: NLP corpus pipelines, recognition models, LLM tools and the backends and deploy pipelines around them.",
 };

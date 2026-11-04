@@ -2,6 +2,22 @@
 
 import { useEffect, useState } from "react";
 import { nav, site } from "@/lib/content";
+import { Arrow } from "@/components/Arrow";
+
+/** Downloads the resume PDF; sits at the right end of the header on every screen size. */
+function ResumeLink() {
+  return (
+    <a
+      href={site.resume}
+      download
+      className="group inline-flex h-8 items-center gap-1.5 border border-ink/80 px-3 text-sm font-medium transition-colors hover:border-signal hover:bg-signal hover:text-paper"
+    >
+      Résumé
+      <Arrow direction="down" className="transition-transform duration-300 group-hover:translate-y-0.5" />
+      <span className="sr-only">(PDF download)</span>
+    </a>
+  );
+}
 
 export function Header() {
   const [active, setActive] = useState<string>("");
@@ -77,18 +93,24 @@ export function Header() {
                 </a>
               </li>
             ))}
+            <li>
+              <ResumeLink />
+            </li>
           </ul>
         </nav>
 
+        <div className="flex items-center gap-3 md:hidden">
+          <ResumeLink />
         <button
           type="button"
-          className="-mr-2 px-2 py-2 font-mono text-xs uppercase tracking-[0.12em] md:hidden"
+          className="-mr-2 px-2 py-2 font-mono text-xs uppercase tracking-[0.12em]"
           aria-expanded={open}
           aria-controls="mobile-nav"
           onClick={() => setOpen((v) => !v)}
         >
           {open ? "Close" : "Menu"}
         </button>
+        </div>
       </div>
 
       {open && (
