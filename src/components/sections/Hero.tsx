@@ -19,11 +19,9 @@ export function Hero() {
       <h1
         data-reveal
         style={{ "--delay": "60ms" } as React.CSSProperties}
-        className="text-[clamp(3.25rem,11.5vw,10rem)] font-semibold leading-[0.86] tracking-tightest"
+        className="whitespace-nowrap text-[clamp(1.75rem,9.4vw,8.75rem)] font-semibold leading-[0.9] tracking-tightest"
       >
-        Saad Khazi
-        <br />
-        Ahmed
+        Saad Khazi Ahmed
       </h1>
 
       <div className="mt-12 grid grid-cols-12 gap-x-6 gap-y-12 sm:mt-16 lg:mt-20">
