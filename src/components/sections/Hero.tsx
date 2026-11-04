@@ -1,333 +1,104 @@
-"use client";
+import { nav, site } from "@/lib/content";
+import { Arrow } from "@/components/Arrow";
 
-import { useEffect, useRef } from "react";
-import {
-  ArrowDown,
-  Download,
-  Github,
-  Linkedin,
-  Mail,
-  Sparkles,
-} from "lucide-react";
+const facts = [
+  { k: "Now", v: "Final year, B.Tech CSE (AI & ML) at VJIT, Hyderabad" },
+  { k: "Previously", v: "AI Developer Intern, VISWAM.AI — Telugu LLM initiative" },
+  { k: "Works across", v: "NLP data, ML models, LLM tooling, backend, CI/CD" },
+  { k: "Open to", v: "Internships and early roles in AI and backend engineering" },
+];
 
-export default function Hero() {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext("2d");
-    if (!ctx) return;
-
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-
-    const particles: {
-      x: number;
-      y: number;
-      r: number;
-      dx: number;
-      dy: number;
-      alpha: number;
-    }[] = [];
-
-    for (let i = 0; i < 80; i++) {
-      particles.push({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
-        r: Math.random() * 1.5 + 0.5,
-        dx: (Math.random() - 0.5) * 0.3,
-        dy: (Math.random() - 0.5) * 0.3,
-        alpha: Math.random() * 0.4 + 0.1,
-      });
-    }
-
-    let animId: number;
-    const animate = () => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      particles.forEach((p) => {
-        p.x += p.dx;
-        p.y += p.dy;
-        if (p.x < 0 || p.x > canvas.width) p.dx *= -1;
-        if (p.y < 0 || p.y > canvas.height) p.dy *= -1;
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(0, 212, 255, ${p.alpha})`;
-        ctx.fill();
-      });
-      // Draw connecting lines
-      particles.forEach((a, i) => {
-        particles.slice(i + 1).forEach((b) => {
-          const dist = Math.hypot(a.x - b.x, a.y - b.y);
-          if (dist < 120) {
-            ctx.beginPath();
-            ctx.strokeStyle = `rgba(0, 212, 255, ${0.04 * (1 - dist / 120)})`;
-            ctx.lineWidth = 0.5;
-            ctx.moveTo(a.x, a.y);
-            ctx.lineTo(b.x, b.y);
-            ctx.stroke();
-          }
-        });
-      });
-      animId = requestAnimationFrame(animate);
-    };
-    animate();
-
-    const handleResize = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-    };
-    window.addEventListener("resize", handleResize);
-
-    return () => {
-      cancelAnimationFrame(animId);
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
-
+export function Hero() {
   return (
-    <section
-      id="hero"
-      className="relative min-h-screen flex items-center overflow-hidden"
-      style={{ paddingTop: "4rem" }}
-    >
-      {/* Particle canvas */}
-      <canvas
-        ref={canvasRef}
-        className="absolute inset-0 pointer-events-none"
-        style={{ opacity: 0.7 }}
-      />
+    <section id="top" aria-label="Introduction" className="page pb-8 pt-14 sm:pt-20 lg:pb-4 lg:pt-28">
+      <p data-reveal className="label mb-8 flex items-center gap-2 sm:mb-10">
+        <span aria-hidden className="inline-block h-1.5 w-1.5 bg-signal" />
+        AI &amp; backend engineering · Hyderabad<span className="hidden sm:inline">, India</span>
+      </p>
 
-      {/* Glow orbs */}
-      <div
-        className="glow-orb"
-        style={{
-          width: "600px",
-          height: "600px",
-          background: "rgba(0,212,255,0.15)",
-          top: "-200px",
-          right: "-100px",
-        }}
-      />
-      <div
-        className="glow-orb"
-        style={{
-          width: "400px",
-          height: "400px",
-          background: "rgba(124,111,255,0.12)",
-          bottom: "-100px",
-          left: "-100px",
-        }}
-      />
+      <h1
+        data-reveal
+        style={{ "--delay": "60ms" } as React.CSSProperties}
+        className="text-[clamp(3.25rem,11.5vw,10rem)] font-semibold leading-[0.86] tracking-tightest"
+      >
+        Saad Khazi
+        <br />
+        Ahmed
+      </h1>
 
-      {/* Grid bg */}
-      <div className="absolute inset-0 grid-bg opacity-40" />
-
-      <div className="relative z-10 max-w-6xl mx-auto px-6 py-24">
-        <div className="max-w-3xl">
-          {/* Status badge */}
-          <div
-            className="inline-flex items-center gap-2 mb-8"
-            style={{
-              background: "rgba(0,212,255,0.06)",
-              border: "1px solid rgba(0,212,255,0.2)",
-              borderRadius: "999px",
-              padding: "0.4rem 1rem",
-              fontSize: "0.78rem",
-              color: "var(--accent)",
-              fontFamily: "'JetBrains Mono', monospace",
-              animation: "fadeUp 0.6s ease both",
-            }}
-          >
-            <span
-              style={{
-                width: "6px",
-                height: "6px",
-                borderRadius: "50%",
-                background: "#00ff88",
-                boxShadow: "0 0 8px #00ff88",
-                flexShrink: 0,
-              }}
-            />
-            <Sparkles size={12} />
-            Open to AI Startup & PM Internships · 2025
-          </div>
-
-          {/* Headline */}
-          <h1
-            style={{
-              fontFamily: "'Playfair Display', serif",
-              fontSize: "clamp(2.8rem, 7vw, 5.5rem)",
-              fontWeight: 700,
-              lineHeight: 1.08,
-              marginBottom: "1.5rem",
-              animation: "fadeUp 0.7s ease both 0.1s",
-              opacity: 0,
-              animationFillMode: "forwards",
-            }}
-          >
-            Building{" "}
-            <span className="gradient-text">AI-Powered</span>
-            <br />
-            Products That{" "}
-            <span
-              style={{
-                color: "var(--text-secondary)",
-                fontStyle: "italic",
-              }}
-            >
-              Ship.
-            </span>
-          </h1>
-
-          {/* Tagline */}
-          <p
-            style={{
-              fontSize: "clamp(1rem, 2.5vw, 1.2rem)",
-              color: "var(--text-secondary)",
-              lineHeight: 1.7,
-              maxWidth: "520px",
-              marginBottom: "2.5rem",
-              animation: "fadeUp 0.7s ease both 0.2s",
-              opacity: 0,
-              animationFillMode: "forwards",
-            }}
-          >
-            CS (AI & ML) student at VJIT Hyderabad — ex AI/LLM Intern at
-            VISWAM.AI. I build end-to-end systems: from LLM pipelines to
-            production deployments.
+      <div className="mt-12 grid grid-cols-12 gap-x-6 gap-y-12 sm:mt-16 lg:mt-20">
+        <div
+          data-reveal
+          style={{ "--delay": "140ms" } as React.CSSProperties}
+          className="col-span-12 lg:col-span-7"
+        >
+          <p className="max-w-[24ch] text-[clamp(1.6rem,3.4vw,2.6rem)] leading-[1.12] tracking-[-0.025em]">
+            I build AI systems <span className="font-serif italic">from the data up</span>, and the software
+            that puts them to work.
+          </p>
+          <p className="mt-6 max-w-[56ch] text-base leading-relaxed text-muted sm:text-[1.0625rem]">
+            I spent the summer of 2025 on the data pipelines behind a Telugu large language model. My own projects
+            go from a model that reads handwritten maths into LaTeX to a web app that tests and deploys itself to
+            Kubernetes on every push.
           </p>
 
-          {/* Floating chips */}
-          <div
-            className="flex flex-wrap gap-2 mb-10"
-            style={{
-              animation: "fadeUp 0.7s ease both 0.3s",
-              opacity: 0,
-              animationFillMode: "forwards",
-            }}
-          >
-            {["LLM Engineer", "NLP", "Python", "Product Thinker", "Open Source"].map(
-              (tag) => (
-                <span key={tag} className="skill-chip">
-                  {tag}
-                </span>
-              )
-            )}
-          </div>
-
-          {/* CTA buttons */}
-          <div
-            className="flex flex-wrap gap-3"
-            style={{
-              animation: "fadeUp 0.7s ease both 0.4s",
-              opacity: 0,
-              animationFillMode: "forwards",
-            }}
-          >
-            <a href="#projects" className="btn-primary">
-              <Sparkles size={15} />
-              View Projects
+          <div className="mt-9 flex flex-wrap items-center gap-3">
+            <a
+              href="#work"
+              className="group inline-flex h-11 items-center gap-2 bg-ink px-5 text-sm font-medium text-paper transition-colors hover:bg-signal"
+            >
+              Selected work
+              <Arrow direction="down" className="transition-transform duration-300 group-hover:translate-y-0.5" />
             </a>
             <a
-              href="/resume.pdf"
-              download
-              className="btn-secondary"
+              href="#contact"
+              className="inline-flex h-11 items-center border border-ink/80 px-5 text-sm font-medium transition-colors hover:border-signal hover:text-signal"
             >
-              <Download size={15} />
-              Download Resume
+              Get in touch
             </a>
-            <a href="#contact" className="btn-secondary">
-              <Mail size={15} />
-              Contact Me
-            </a>
-          </div>
-
-          {/* Social row */}
-          <div
-            className="flex items-center gap-5 mt-10"
-            style={{
-              animation: "fadeUp 0.7s ease both 0.5s",
-              opacity: 0,
-              animationFillMode: "forwards",
-            }}
-          >
-            <a
-              href="https://github.com/Saadahmed05"
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{ color: "var(--text-muted)", transition: "color 0.2s" }}
-              onMouseEnter={(e) =>
-                ((e.currentTarget as HTMLAnchorElement).style.color =
-                  "var(--accent)")
-              }
-              onMouseLeave={(e) =>
-                ((e.currentTarget as HTMLAnchorElement).style.color =
-                  "var(--text-muted)")
-              }
-            >
-              <Github size={20} />
-            </a>
-            <a
-              href="https://linkedin.com/in/saadahmed05"
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{ color: "var(--text-muted)", transition: "color 0.2s" }}
-              onMouseEnter={(e) =>
-                ((e.currentTarget as HTMLAnchorElement).style.color =
-                  "var(--accent)")
-              }
-              onMouseLeave={(e) =>
-                ((e.currentTarget as HTMLAnchorElement).style.color =
-                  "var(--text-muted)")
-              }
-            >
-              <Linkedin size={20} />
-            </a>
-            <span
-              style={{
-                width: "1px",
-                height: "20px",
-                background: "var(--border-subtle)",
-              }}
-            />
-            <span
-              style={{
-                fontFamily: "'JetBrains Mono', monospace",
-                fontSize: "0.7rem",
-                color: "var(--text-muted)",
-              }}
-            >
-              CGPA 9.05 · VJIT Hyderabad
+            <span className="flex items-center gap-5 text-sm sm:ml-2">
+              <a href={site.github} target="_blank" rel="noopener noreferrer" className="link">
+                GitHub
+              </a>
+              <a href={site.linkedin} target="_blank" rel="noopener noreferrer" className="link">
+                LinkedIn
+              </a>
             </span>
           </div>
         </div>
+
+        <dl
+          data-reveal
+          style={{ "--delay": "220ms" } as React.CSSProperties}
+          className="col-span-12 self-end border-t border-rule text-sm lg:col-span-4 lg:col-start-9"
+        >
+          {facts.map(({ k, v }) => (
+            <div key={k} className="grid grid-cols-[7.5rem_1fr] gap-4 border-b border-rule py-3">
+              <dt className="text-muted">{k}</dt>
+              <dd>{v}</dd>
+            </div>
+          ))}
+        </dl>
       </div>
 
-      {/* Scroll indicator */}
-      <div
-        className="absolute bottom-8 left-1/2"
-        style={{
-          transform: "translateX(-50%)",
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          gap: "0.5rem",
-          color: "var(--text-muted)",
-          animation: "float 3s ease-in-out infinite",
-        }}
-      >
-        <span
-          style={{
-            fontFamily: "'JetBrains Mono', monospace",
-            fontSize: "0.65rem",
-            letterSpacing: "0.15em",
-          }}
-        >
-          scroll
-        </span>
-        <ArrowDown size={14} />
-      </div>
+      {/* Table of contents doubles as the hero's lower edge. */}
+      <nav aria-label="On this page" data-reveal className="mt-20 hidden lg:block">
+        <ol className="grid grid-cols-6 border-t border-ink">
+          {nav.map(({ id, label }, i) => (
+            <li key={id}>
+              <a
+                href={`#${id}`}
+                className="group flex items-baseline gap-2 pt-3 text-sm text-muted transition-colors hover:text-ink"
+              >
+                <span className="font-mono text-[0.6875rem] transition-colors group-hover:text-signal">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                {label}
+              </a>
+            </li>
+          ))}
+        </ol>
+      </nav>
     </section>
   );
 }

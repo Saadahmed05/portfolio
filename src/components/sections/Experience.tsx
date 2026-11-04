@@ -1,215 +1,49 @@
-"use client";
+import { Section } from "@/components/Section";
+import { internship as job } from "@/lib/content";
 
-import { Briefcase, Calendar, MapPin, ChevronRight } from "lucide-react";
-
-const experience = [
-  {
-    company: "VISWAM.AI",
-    subtitle: "Meta × IIIT Hyderabad × Swecha Telangana",
-    role: "AI/LLM Intern",
-    duration: "May 2025 – June 2025",
-    location: "Hyderabad, India",
-    type: "AI Developer Intern",
-    color: "#00d4ff",
-    bullets: [
-      "Contributed to large-scale Telugu LLM under a national open-source AI initiative focused on NLP and generative AI systems.",
-      "Performed data cleaning, deduplication, annotation, and preprocessing — reducing noisy samples by 25–30% before training.",
-      "Supported speech and text corpus creation pipelines, accelerating model training readiness by ~20% through structured preprocessing workflows.",
-      "Collaborated within a cross-institutional AI research team, gaining exposure to LLM pipelines, ML workflows, and data engineering systems.",
-    ],
-    tech: ["LLMs", "NLP", "Data Engineering", "Python", "Speech Corpus", "Annotation"],
-  },
-];
-
-export default function Experience() {
+export function Experience() {
   return (
-    <section
-      id="experience"
-      style={{
-        padding: "7rem 1.5rem",
-        background: "rgba(10,15,30,0.4)",
-      }}
-    >
-      <div className="max-w-6xl mx-auto">
-        <div className="reveal mb-12">
-          <div className="section-tag">Experience</div>
-          <h2
-            style={{
-              fontFamily: "'Playfair Display', serif",
-              fontSize: "clamp(2rem, 4vw, 3rem)",
-              fontWeight: 700,
-            }}
-          >
-            Where I&apos;ve{" "}
-            <span className="gradient-text-cool">worked & contributed</span>
-          </h2>
+    <Section id="experience" number="02" title="Experience" className="py-20 sm:py-28">
+      <article data-reveal className="grid grid-cols-9 gap-x-6 gap-y-6">
+        <div className="col-span-9 sm:col-span-2">
+          <p className="font-mono text-xs text-muted">{job.dates}</p>
+          <p className="mt-1 font-mono text-xs text-muted">{job.place}</p>
         </div>
 
-        <div className="space-y-6">
-          {experience.map((job, i) => (
-            <div
-              key={job.company}
-              className={`glass-card reveal reveal-delay-${i + 1}`}
-              style={{ padding: "2rem" }}
-            >
-              <div className="flex flex-col lg:flex-row gap-6">
-                {/* Left */}
-                <div className="lg:w-64 flex-shrink-0 space-y-3">
-                  {/* Company badge */}
-                  <div
-                    style={{
-                      display: "inline-block",
-                      background: `rgba(0,212,255,0.08)`,
-                      border: `1px solid rgba(0,212,255,0.2)`,
-                      borderRadius: "8px",
-                      padding: "0.4rem 0.75rem",
-                      fontSize: "0.7rem",
-                      fontFamily: "'JetBrains Mono', monospace",
-                      color: job.color,
-                      textTransform: "uppercase",
-                      letterSpacing: "0.1em",
-                    }}
-                  >
-                    {job.type}
-                  </div>
+        <div className="col-span-9 sm:col-span-7">
+          <h3 className="text-2xl font-medium tracking-[-0.02em] sm:text-3xl">
+            {job.role}, <span className="text-muted">{job.org}</span>
+          </h3>
+          <p className="mt-2 text-muted">{job.program}</p>
 
-                  <div>
-                    <h3
-                      style={{
-                        fontSize: "1.1rem",
-                        fontWeight: 700,
-                        color: "var(--text-primary)",
-                      }}
-                    >
-                      {job.company}
-                    </h3>
-                    <p
-                      style={{
-                        fontSize: "0.75rem",
-                        color: "var(--text-muted)",
-                        marginTop: "0.2rem",
-                        lineHeight: 1.4,
-                      }}
-                    >
-                      {job.subtitle}
-                    </p>
-                  </div>
+          <ul className="mt-8 max-w-[64ch] space-y-4 leading-relaxed">
+            {job.points.map((p) => (
+              <li key={p} className="grid grid-cols-[1.25rem_1fr]">
+                <span aria-hidden className="mt-[0.7em] h-px w-2.5 bg-signal" />
+                <span>{p}</span>
+              </li>
+            ))}
+          </ul>
 
-                  <div className="space-y-1">
-                    <div
-                      className="flex items-center gap-1.5"
-                      style={{ fontSize: "0.8rem", color: "var(--text-secondary)" }}
-                    >
-                      <Briefcase size={13} style={{ color: "var(--accent)" }} />
-                      {job.role}
-                    </div>
-                    <div
-                      className="flex items-center gap-1.5"
-                      style={{ fontSize: "0.78rem", color: "var(--text-muted)" }}
-                    >
-                      <Calendar size={13} />
-                      {job.duration}
-                    </div>
-                    <div
-                      className="flex items-center gap-1.5"
-                      style={{ fontSize: "0.78rem", color: "var(--text-muted)" }}
-                    >
-                      <MapPin size={13} />
-                      {job.location}
-                    </div>
-                  </div>
-                </div>
-
-                {/* Divider */}
-                <div
-                  style={{
-                    width: "1px",
-                    background: "var(--border)",
-                    flexShrink: 0,
-                    display: "none",
-                  }}
-                  className="lg:block"
-                />
-
-                {/* Right */}
-                <div className="flex-1 space-y-5">
-                  <ul className="space-y-3">
-                    {job.bullets.map((b, j) => (
-                      <li
-                        key={j}
-                        className="flex items-start gap-3"
-                        style={{ fontSize: "0.875rem", color: "var(--text-secondary)", lineHeight: 1.7 }}
-                      >
-                        <ChevronRight
-                          size={14}
-                          style={{
-                            color: "var(--accent)",
-                            flexShrink: 0,
-                            marginTop: "0.3rem",
-                          }}
-                        />
-                        {b}
-                      </li>
-                    ))}
-                  </ul>
-
-                  {/* Tech chips */}
-                  <div className="flex flex-wrap gap-2 pt-2" style={{ borderTop: "1px solid var(--border-subtle)" }}>
-                    {job.tech.map((t) => (
-                      <span key={t} className="skill-chip">
-                        {t}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </div>
-          ))}
+          {/* The shape of the work: raw data in, training corpus out. */}
+          <figure className="mt-12 border-t border-rule pt-5">
+            <figcaption className="label mb-5">Where the work sat</figcaption>
+            <ol className="grid grid-cols-2 gap-x-3 gap-y-5 text-sm sm:grid-cols-3 xl:grid-cols-6">
+              {job.stages.map((s, i) => {
+                const edge = i === 0 || i === job.stages.length - 1;
+                return (
+                  <li key={s} className={`border-t-2 pt-2.5 ${edge ? "border-rule text-muted" : "border-ink"}`}>
+                    <span className="block font-mono text-[0.6875rem] text-muted">
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+                    <span className={`mt-1 block ${edge ? "" : "font-medium"}`}>{s}</span>
+                  </li>
+                );
+              })}
+            </ol>
+          </figure>
         </div>
-
-        {/* Open to roles */}
-        <div
-          className="mt-8 reveal"
-          style={{
-            textAlign: "center",
-            padding: "2rem",
-            background: "rgba(0,212,255,0.03)",
-            border: "1px dashed rgba(0,212,255,0.2)",
-            borderRadius: "12px",
-          }}
-        >
-          <div
-            style={{
-              display: "inline-flex",
-              alignItems: "center",
-              gap: "0.5rem",
-              marginBottom: "0.5rem",
-            }}
-          >
-            <span
-              style={{
-                width: "8px",
-                height: "8px",
-                borderRadius: "50%",
-                background: "#00ff88",
-                boxShadow: "0 0 8px #00ff88",
-              }}
-            />
-            <span
-              style={{
-                fontFamily: "'JetBrains Mono', monospace",
-                fontSize: "0.75rem",
-                color: "#00ff88",
-              }}
-            >
-              Available for Internships — 2025
-            </span>
-          </div>
-          <p style={{ fontSize: "0.875rem", color: "var(--text-muted)" }}>
-            Open to AI/ML, Product, and Software Engineering roles at startups and product companies.
-          </p>
-        </div>
-      </div>
-    </section>
+      </article>
+    </Section>
   );
 }
